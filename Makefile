@@ -1,6 +1,4 @@
-compile:
+sequential:
 	mkdir -p target
-	g++ main.cpp -o target/is-prime
-
-run:
-	./target/is-prime
+	g++ src/sequential.cpp -o target/app
+	./target/app $(number)
