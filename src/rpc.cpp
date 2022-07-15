@@ -1,5 +1,5 @@
-#include "digit_array.hpp"
-#include "rpc.hpp"
+#include "digit_array.cpp"
+#include "rpc_engine.cpp"
 
 bool isDivider(int dividend, int divider) {
     return *(DigitArray(dividend) % DigitArray(divider)) == DigitArray(0);

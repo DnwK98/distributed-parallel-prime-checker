@@ -3,7 +3,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include "digit_array.hpp"
+#include "digit_array.cpp"
 #include <mpi.h>
 
 #define QUEUE_INIT 1

@@ -8,7 +8,7 @@
 #include <mutex>
 #include <unistd.h>
 #include <atomic>
-#include "digit_array.hpp"
+#include "digit_array.cpp"
 
 
 std::mutex checkerLock;
