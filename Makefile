@@ -17,3 +17,8 @@ mpi:
 	mkdir -p target
 	mpic++ src/mpi.cpp -o target/app 
 	mpirun target/app $(number)
+
+rpc:
+	mkdir -p target
+	mpic++ src/rpc.cpp -o target/app 
+	mpirun target/app $(number)
