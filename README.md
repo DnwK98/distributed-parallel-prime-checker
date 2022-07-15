@@ -23,3 +23,7 @@ make threads number={number_to_check}
 # Message Passing Interface
 make mpi number={number_to_check}
 ```
+```bash
+# Remote Procedure Call
+make rpc number={number_to_check}
+```
