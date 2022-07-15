@@ -4,10 +4,8 @@
 #include <stdlib.h>
 #include <math.h> 
 
-/**
- * TODO Correct implementation of ++operator, %operator, and comparasion
- *      to use array instead of int. 
- */
+class DivisionByZeroException{};
+
 class DigitArray {
     private:
         int length;
@@ -61,39 +59,66 @@ class DigitArray {
             return this;
         }
 
-        bool operator== (const DigitArray& other) {
+        DigitArray* operator- (const DigitArray& other) const {
+            if(*this < other) {
+                return new DigitArray(-1);
+            }
+            DigitArray* tmp = new DigitArray(*this);
+            int lengthDiff = tmp->length - other.length;
+          
+            for(int i = other.length - 1; i>=0; --i) {
+                if(tmp->number[i + lengthDiff] < other.number[i]) {
+                    tmp->number[i + lengthDiff] += 10;
+                    tmp->number[i - 1 + lengthDiff] -= 1;
+                }
+                tmp->number[i + lengthDiff] -= other.number[i];
+            }
+
+            return tmp;
+        }
+
+        DigitArray* operator% (const DigitArray& other) {
+            if(other == DigitArray(0)) {
+                throw new DivisionByZeroException();
+            }
+            DigitArray* tmp = new DigitArray(*this);
+            while(*tmp >= other) {
+                tmp = *tmp - other;
+            }
+            
+            return tmp;
+        }
+
+        bool operator== (const DigitArray& other) const {
             return 0 == compare(other);
         }
 
-        bool operator!= (const DigitArray& other) {
+        bool operator!= (const DigitArray& other) const {
             return 0 != compare(other);
         }
 
-        bool operator< (const DigitArray& other) {
+        bool operator< (const DigitArray& other) const {
             return compare(other) < 0;
         }
 
-        bool operator<= (const DigitArray& other) {
+        bool operator<= (const DigitArray& other) const {
             return compare(other) <= 0;
         }
 
-        bool operator> (const DigitArray& other) {
+        bool operator> (const DigitArray& other) const {
             return compare(other) > 0;
         }
 
-        bool operator>= (const DigitArray& other) {
+        bool operator>= (const DigitArray& other) const {
             return compare(other) >= 0;
-        }
-        DigitArray* operator% (const DigitArray& other) {
-            int rest = toInt() % other.toInt();
-            
-            return new DigitArray(rest);
         }
 
     private:
-        int compare(const DigitArray& other) {
+
+        int compare(const DigitArray& other) const {
             return this->toInt() - other.toInt();
         }
+
         void applyString(const char* buffer) {
             length = 0;
             while(buffer[length] != '\0') ++length;
