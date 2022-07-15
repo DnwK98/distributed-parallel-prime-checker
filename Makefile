@@ -12,3 +12,8 @@ threads:
 	mkdir -p target
 	g++ src/threads.cpp -o target/app -pthread
 	./target/app $(number)
+
+mpi:
+	mkdir -p target
+	mpic++ src/mpi.cpp -o target/app 
+	mpirun target/app $(number)
